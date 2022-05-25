@@ -3,6 +3,7 @@ body {
     color: #ccc;
     background: #333;
 }
+
 textarea {
     font-family: inherit;
     display: block;
@@ -14,27 +15,42 @@ textarea {
     font-size: large;
     border: 1px solid #ccc;
 }
+
 button {
     font-family: inherit;
-    margin: 1em 0;
+    margin: 1em 1em 1em auto;
+    display: block;
     border: none;
     background-color: cornflowerblue;
     color: #fff;
     padding: .5em 1em;
-    font-size:large;
+    font-size: large;
 }
+
 body.prompter {
     user-select: none;
     -webkit-user-select: none;
 }
-body.prompter textarea, body.prompter button, body.prompter header {
+
+body.prompter textarea,
+body.prompter button,
+body.prompter header {
     display: none;
 }
+
 body output {
     display: none;
 }
-body.prompter output{
+
+body.prompter output {
     display: block;
     padding: 1em 3em;
-    font-size: 2vw;
+    font-size: 2.5em;
+}
+output span {
+    display: block;
+    position: absolute;
+    right: 0;
+    margin: 3em 0;
+    font-size: 0.5em;
 }

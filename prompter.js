@@ -4,7 +4,7 @@ let i = 0;
 let output = document.querySelector("output");
 const changedisplay = () => {
     displaymode = !displaymode;
-     document.body.className = displaymode ? 'prompter' : '';
+    document.body.className = displaymode ? 'prompter' : '';
 }
 const start = () => {
     let script = document.querySelector('textarea').value;
@@ -15,16 +15,22 @@ const start = () => {
 }
 const next = () => {
     output.innerHTML = `${paras[i]}`;
+    // output.innerHTML = `${paras[i]} <span>(${i + 1}/${paras.length})</span>`;
     i++;
     i = i % paras.length;
 }
-document.addEventListener('keyup', function(event){
+document.addEventListener('keyup', function (event) {
     if (displaymode) {
-        if(event.key == 'ArrowRight'){next();}
-        if(event.keyCode == 27){changedisplay();output.innerHTML = '';}
+        if (event.key == 'ArrowRight') {
+            next();
+        }
+        if (event.key == 'Escape') {
+            changedisplay();
+            output.innerHTML = '';
+        }
     }
 });
-window.addEventListener('click', function(event){
+window.addEventListener('click', function (event) {
     if (displaymode) {
         next();
     }
