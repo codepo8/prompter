@@ -2,20 +2,29 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #ccc;
     background: #333;
+    margin: 0;
+    padding: 0;
 }
-
+h1 {
+    font-size: 1.3em;
+    margin: 0;
+    padding: 0;
+}
 textarea {
     font-family: inherit;
     display: block;
-    height: 20em;
-    width: 98%;
-    padding: 1%;
+    height: 30vh;
+    width: calc(100% - 4em);
+    padding: 1em;
+    margin: .5em;
     background: black;
     color: grey;
     font-size: large;
     border: 1px solid #ccc;
 }
-
+header {
+    margin: .5em;
+}
 button {
     font-family: inherit;
     margin: 1em 1em 1em auto;
@@ -41,10 +50,11 @@ body.prompter header {
 body output {
     display: none;
 }
-
 body.prompter output {
     display: block;
-    padding: 1em 3em;
+    padding: 0.5em;
+    max-width: 30em;
+    margin: 1em auto;
     font-size: 2.5em;
 }
 output span {
@@ -53,4 +63,22 @@ output span {
     right: 0;
     margin: 3em 0;
     font-size: 0.5em;
+}
+
+@media (pointer: coarse) {
+    body button.close {
+        display: none;
+    }
+    body.prompter button.close {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+    }
+}
+@media (pointer: fine) {
+    button.close {
+        display: none;
+    }
 }

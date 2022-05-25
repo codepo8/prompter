@@ -19,20 +19,28 @@ const next = () => {
     i++;
     i = i % paras.length;
 }
+const end = () => {
+    changedisplay();
+    output.innerHTML = '';
+}
 document.addEventListener('keyup', function (event) {
     if (displaymode) {
         if (event.key == 'ArrowRight') {
             next();
         }
         if (event.key == 'Escape') {
-            changedisplay();
-            output.innerHTML = '';
+            end();
         }
     }
 });
 window.addEventListener('click', function (event) {
     if (displaymode) {
-        next();
+        if (event.target.nodeName == 'BUTTON' && event.target.className == 'close') {
+            console.log('x')
+            end();
+        } else {
+            next();
+        }
     }
 });
 document.querySelector('button').addEventListener('click', e => {
