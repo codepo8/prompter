@@ -1,0 +1,40 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ccc;
+    background: #333;
+}
+textarea {
+    font-family: inherit;
+    display: block;
+    height: 20em;
+    width: 98%;
+    padding: 1%;
+    background: black;
+    color: grey;
+    font-size: large;
+    border: 1px solid #ccc;
+}
+button {
+    font-family: inherit;
+    margin: 1em 0;
+    border: none;
+    background-color: cornflowerblue;
+    color: #fff;
+    padding: .5em 1em;
+    font-size:large;
+}
+body.prompter {
+    user-select: none;
+    -webkit-user-select: none;
+}
+body.prompter textarea, body.prompter button, body.prompter header {
+    display: none;
+}
+body output {
+    display: none;
+}
+body.prompter output{
+    display: block;
+    padding: 1em 3em;
+    font-size: 2vw;
+}

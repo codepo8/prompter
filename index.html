@@ -3,49 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ccc;
-            background: #333;
-        }
-        textarea {
-            font-family: inherit;
-            display: block;
-            height: 20em;
-            width: 98%;
-            padding: 1%;
-            background: black;
-            color: grey;
-            font-size: large;
-            border: 1px solid #ccc;
-        }
-        button {
-            font-family: inherit;
-            margin: 1em 0;
-            border: none;
-            background-color: cornflowerblue;
-            color: #fff;
-            padding: .5em 1em;
-            font-size:large;
-        }
-        body.prompter {
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        body.prompter textarea, body.prompter button, body.prompter header {
-            display: none;
-        }
-        body output {
-            display: none;
-        }
-        body.prompter output{
-            display: block;
-            padding: 1em 3em;
-            font-size: 2vw;
-        }
-    </style>
+    <title>Prompter</title>
+    <link rel="stylesheet" href="prompter.css">    
 </head>
 <body>
     <header>
@@ -83,44 +42,7 @@ The Edge DevTools for VS Code extension has a browser with a new emulation toolb
 
 We'd love for you to play with this and tell us if that's something you'd like to see in the main browser tools as well. Head on over to GitHub and tell us what you think.</textarea>
     <button type="button">Show as prompt</button>
- <script>
-
-
-let paras = [];
-let displaymode = false;
-let i = 0;
-let output = document.querySelector("output");
-const changedisplay = () => {
-    displaymode = !displaymode;
-     document.body.className = displaymode ? 'prompter' : '';
-}
-const start = () => {
-    let script = document.querySelector('textarea').value;
-    paras = script.split("\n");
-    paras = paras.filter(paras => paras.length > 0);
-    changedisplay();
-    i = 0;
-}
-const next = () => {
-    output.innerHTML = `${paras[i]}`;
-    i++;
-    i = i % paras.length;
-}
-document.addEventListener('keyup', function(event){
-    if (displaymode) {
-        if(event.key == 'ArrowRight'){next();}
-        if(event.keyCode == 27){changedisplay();output.innerHTML = '';}
-    }
-});
-window.addEventListener('click', function(event){
-    if (displaymode) {
-        next();
-    }
-});
-document.querySelector('button').addEventListener('click', e => {
-    start();
-});
- </script>   
+     <script src="prompter.js"></script>   
 </body>
 </html>
 
