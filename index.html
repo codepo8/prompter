@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ccc;
+            background: #333;
+        }
+        textarea {
+            font-family: inherit;
+            display: block;
+            height: 20em;
+            width: 98%;
+            padding: 1%;
+            background: black;
+            color: grey;
+            font-size: large;
+            border: 1px solid #ccc;
+        }
+        button {
+            font-family: inherit;
+            margin: 1em 0;
+            border: none;
+            background-color: cornflowerblue;
+            color: #fff;
+            padding: .5em 1em;
+            font-size:large;
+        }
+        body.prompter {
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        body.prompter textarea, body.prompter button, body.prompter header {
+            display: none;
+        }
+        body output {
+            display: none;
+        }
+        body.prompter output{
+            display: block;
+            padding: 1em 3em;
+            font-size: 2vw;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Prompter</h1>
+        <p>The following text will be displayed paragraph by paragraph when you click the "Show as prompt" button.</p>
+        <p>Press the right arrow or click on the document to go to the next paragraph. After the last paragraph it restarts. Press ESC to go back.</p>
+    </header>
+    <output></output>
+    <textarea>
+The great thing about the web is that you never know how your users consume your products.
+Different people have different abilities and needs.
+
+Web technologies and browsers allow people to change the display of web products accordingly. 
+Which means that as a developer you never have full control over how things look and work.
+
+Your end users may use a touch device, a screenreader, set up their OS or browser to show huge text, turn off any animations or need to experience everything zoomed or in a high contrast mode.
+
+The problem is that testing for all these options can be tricky. As you need to change your OS settings it also affects your other tools which can make them harder to use.
+
+That's why we gave you the option to do some spot checking right inside the browser developer tools.
+
+Device emulation allows you to simulate different mobile devices and emulate touch interfaces.
+
+You can also throttle the connection speed to see how your product behaves on a flaky connection.
+
+The Rendering tool allows you to simulate print mode, light and dark mode and turn off animations. You can also emulate the forced colours mode of Windows - even on other platforms.
+
+And last but not least, you can check how your product appears blurred or to people with different visual colour deficiencies.
+
+If you want to know more about accessibility testing features in the browser DevTools, you can read up on the official documentation.
+
+Whilst these things are great, they are hard to find and spread across several tools in the browser. That's why we are working on a way to make that easier.
+
+The Edge DevTools for VS Code extension has a browser with a new emulation toolbar. This one allows you to emulate different devices, modes and display options in an easier fashion.
+
+We'd love for you to play with this and tell us if that's something you'd like to see in the main browser tools as well. Head on over to GitHub and tell us what you think.</textarea>
+    <button type="button">Show as prompt</button>
+ <script>
+
+
+let paras = [];
+let displaymode = false;
+let i = 0;
+let output = document.querySelector("output");
+const changedisplay = () => {
+    displaymode = !displaymode;
+     document.body.className = displaymode ? 'prompter' : '';
+}
+const start = () => {
+    let script = document.querySelector('textarea').value;
+    paras = script.split("\n");
+    paras = paras.filter(paras => paras.length > 0);
+    changedisplay();
+    i = 0;
+}
+const next = () => {
+    output.innerHTML = `${paras[i]}`;
+    i++;
+    i = i % paras.length;
+}
+document.addEventListener('keyup', function(event){
+    if (displaymode) {
+        if(event.key == 'ArrowRight'){next();}
+        if(event.keyCode == 27){changedisplay();output.innerHTML = '';}
+    }
+});
+window.addEventListener('click', function(event){
+    if (displaymode) {
+        next();
+    }
+});
+document.querySelector('button').addEventListener('click', e => {
+    start();
+});
+ </script>   
+</body>
+</html>
+
