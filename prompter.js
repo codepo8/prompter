@@ -13,11 +13,11 @@ const start = () => {
     changedisplay();
     i = 0;
 }
-const next = () => {
-    output.innerHTML = `${paras[i]}`;
-    // output.innerHTML = `${paras[i]} <span>(${i + 1}/${paras.length})</span>`;
-    i++;
+const navigate = (step) => {
+    i += step;
+    i = Math.max(i,0);
     i = i % paras.length;
+    output.innerHTML = `${paras[i]}`;
 }
 const end = () => {
     changedisplay();
@@ -26,7 +26,10 @@ const end = () => {
 document.addEventListener('keyup', function (event) {
     if (displaymode) {
         if (event.key == 'ArrowRight') {
-            next();
+            navigate(1);
+        }
+        if (event.key == 'ArrowLeft') {
+            navigate(-1);
         }
         if (event.key == 'Escape') {
             end();
@@ -36,10 +39,9 @@ document.addEventListener('keyup', function (event) {
 window.addEventListener('click', function (event) {
     if (displaymode) {
         if (event.target.nodeName == 'BUTTON' && event.target.className == 'close') {
-            console.log('x')
             end();
         } else {
-            next();
+            navigate(0);
         }
     }
 });
